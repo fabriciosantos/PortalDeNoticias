@@ -1,20 +1,9 @@
-module.exports = function (app) {
+module.exports = function (application) {
+    application.get('/noticias', function (req, res) {
+       application.app.controllers.noticias.noticias(application, req, res);
+    });
 
-    app.get('/noticias', function (req, res) {
-
-        var mysql = require('mysql');
-
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: 'root',
-            database: 'portal_noticias'
-        });
-
-        connection.query('select * from noticias', function (error, result) {
-            res.send(result);
-        });
-
-        //res.render("noticias/noticias");
+    application.get('/noticia', function (req, res) {       
+       application.app.controllers.noticias.noticia(application, req, res);
     });
 };
